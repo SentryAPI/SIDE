@@ -1,0 +1,2 @@
+# SIDE
+SIDE: Sentry IDE
