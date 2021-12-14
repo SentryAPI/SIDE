@@ -4,3 +4,4 @@ side.wasm
 CMakeFiles/
 Makefile
 *.cmake
+_deps/
