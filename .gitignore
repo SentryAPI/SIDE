@@ -5,3 +5,6 @@ CMakeFiles/
 Makefile
 *.cmake
 _deps/
+*.ninja
+*.ninja_deps
+*.ninja_log
