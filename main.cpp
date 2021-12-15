@@ -7,6 +7,7 @@
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include <stdio.h>
+#include <unistd.h>
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
 #endif
@@ -83,6 +84,32 @@ void end_dockspace() {
     ImGui::End();
 }
 
+/*extern "C" void EMSCRIPTEN_KEEPALIVE _processBuffer(char* buffer) {
+
+}
+
+extern "C" void EMSCRIPTEN_KEEPALIVE _sleeping(int ms) {
+    sleep(ms);
+}
+
+EM_JS(void, testMenuDef, (), {
+    const input = document.querySelector('input');
+
+    $("input").trigger("click");
+
+    function waitForElement(){
+        if(typeof someVariable !== "undefined"){
+            var buf = input.file.arrayBuffer();
+
+            buf.then(buffer => Module._processBuffer(buffer));
+        }
+        else{
+            setTimeout(waitForElement, 250);
+        }
+    }
+});         This was for testing*/
+
+
 void do_frame()
 {   
     // Poll and handle events (inputs, window resize, etc.)
@@ -99,7 +126,19 @@ void do_frame()
 
     setup_dockspace();
 
-    ImGui::Begin("Explorer");
+    ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar;
+
+    ImGui::SetNextWindowSize(ImVec2(400, 400));
+
+    ImGui::Begin("Explorer", nullptr, window_flags);
+
+    if (ImGui::BeginMenuBar()) {
+        if (ImGui::BeginMenu("File Menu")) {
+            ImGui::
+            ImGui::EndMenu();
+        }
+        ImGui::EndMenuBar();
+    }
     ImGui::End();
 
     end_dockspace();
@@ -145,7 +184,7 @@ int main(int, char**)
 #endif
 
     // Create window with graphics context
-    window = glfwCreateWindow(display_w, display_h, "Dear ImGui GLFW+OpenGL3 example", NULL, NULL);
+    window = glfwCreateWindow(display_w, display_h, "S.I.D.E Window", NULL, NULL);
     if (window == NULL)
         return 1;
     glfwMakeContextCurrent(window);
