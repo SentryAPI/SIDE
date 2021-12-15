@@ -4,10 +4,8 @@ include(ExternalProject)
 include(FetchContent)
 add_executable(side)
 
-target_sources(side PRIVATE
-    "main.cpp"
-)
 add_subdirectory(imgui)
+add_subdirectory(src)
 
 option(USE_LEGACY_OPENGL "Use Legacy OpenGL (fixed function pipeline) or Modern OpenGL (with shaders)" OFF)
 if(USE_LEGACY_OPENGL)

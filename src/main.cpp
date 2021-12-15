@@ -3,9 +3,9 @@
 // If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
 // Read online: https://github.com/ocornut/imgui/tree/master/docs
 
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_glfw.h"
-#include "imgui/imgui_impl_opengl3.h"
+#include "../imgui/imgui.h"
+#include "../imgui/imgui_impl_glfw.h"
+#include "../imgui/imgui_impl_opengl3.h"
 #include <stdio.h>
 #include <unistd.h>
 #if defined(IMGUI_IMPL_OPENGL_ES2)
@@ -128,13 +128,12 @@ void do_frame()
 
     ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar;
 
-    ImGui::SetNextWindowSize(ImVec2(400, 400));
+    //ImGui::SetNextWindowSize(ImVec2(400, 400));
 
     ImGui::Begin("Explorer", nullptr, window_flags);
 
     if (ImGui::BeginMenuBar()) {
         if (ImGui::BeginMenu("File Menu")) {
-            ImGui::
             ImGui::EndMenu();
         }
         ImGui::EndMenuBar();
