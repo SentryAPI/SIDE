@@ -1,0 +1,7 @@
+CMakeCache.txt
+side.js
+side.wasm
+CMakeFiles/
+Makefile
+*.cmake
+_deps/
