@@ -14,6 +14,8 @@
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
 #include<emscripten/emscripten.h>
 #include <iostream>
+#include "render_host.h"
+#include "editor.h"
 
 // [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
 // To link with VS2010-era libraries, VS2015+ requires linking with legacy_stdio_definitions.lib, which we do using this pragma.
@@ -70,7 +72,9 @@ void setup_dockspace() {
     {
         if (ImGui::BeginMenu("File"))
         {
-            ImGui::MenuItem("Open");
+            if(ImGui::MenuItem("Open")) {
+                render_host::queue_obj(new editor("/test.txt", "Text Editor"));
+            }
             ImGui::MenuItem("Save (Download)");
 
             ImGui::EndMenu();
@@ -125,6 +129,8 @@ void do_frame()
     ImGui::NewFrame();
 
     setup_dockspace();
+
+    render_host::render_all();
 
     ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar;
 
