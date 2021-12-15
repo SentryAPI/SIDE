@@ -13,7 +13,7 @@ self.addEventListener('install', event => {
     // cache necessary files
     event.waitUntil(
         caches.open(cache_id).then(function (cache) {
-            cache.addAll(file);
+            cache.addAll(filesToCache);
         })
     );
 });
