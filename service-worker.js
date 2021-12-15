@@ -1,19 +1,19 @@
 filesToCache = [
+    "/",
     "/side.wasm",
     "/side.js",
-    "index.html",
-    "index.css"
-]
+    "/index.html",
+    "/index.css"
+];
+var cache_id = "side-cache-v1";
 
 self.addEventListener('install', event => {
     console.log('Installing SIDE...');
   
     // cache necessary files
     event.waitUntil(
-        caches.open('side-cache').then(function (cache) {
-            for(var file in filesToCache) {
-                cache.add(file);
-            }
+        caches.open(cache_id).then(function (cache) {
+            cache.addAll(file);
         })
     );
 });
@@ -23,12 +23,9 @@ self.addEventListener('activate', event => {
 });
   
 self.addEventListener('fetch', event => {
-    const url = new URL(event.request.url);
-  
-    // Serve all cached content
-    if (url.origin == location.origin && url.pathname == '/') {
-        for(var file in filesToCache) {
-            event.respondWith(caches.match(file));
-        }
-    }
+    event.respondWith(caches.open(cache_id).then(function(cache) {
+        cache.match(event.request).then(function(response){
+            return response || fetch(event.request);
+        })
+    }));
 });
