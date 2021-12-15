@@ -12,6 +12,7 @@
 #endif
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
 #include<emscripten/emscripten.h>
+#include <iostream>
 
 // [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
 // To link with VS2010-era libraries, VS2015+ requires linking with legacy_stdio_definitions.lib, which we do using this pragma.
@@ -30,6 +31,14 @@ bool show_demo_window = true;
 bool show_another_window = false;
 ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 GLFWwindow* window;
+
+int display_w = 1280;
+int display_h = 720;
+extern "C" void EMSCRIPTEN_KEEPALIVE native_resize(int width, int height) {
+    display_w = width;
+    display_h = height;
+    glfwSetWindowSize(window, display_w, display_h);
+}
 
 void do_frame()
 {   
@@ -55,7 +64,7 @@ void do_frame()
         static int counter = 0;
 
         ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
+        ImGui::Text("Width: %d Height: %d", display_w, display_h);
         ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
         ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
         ImGui::Checkbox("Another Window", &show_another_window);
@@ -84,8 +93,6 @@ void do_frame()
 
     // Rendering
     ImGui::Render();
-    int display_w, display_h;
-    glfwGetFramebufferSize(window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
     glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -125,7 +132,7 @@ int main(int, char**)
 #endif
 
     // Create window with graphics context
-    window = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+OpenGL3 example", NULL, NULL);
+    window = glfwCreateWindow(display_w, display_h, "Dear ImGui GLFW+OpenGL3 example", NULL, NULL);
     if (window == NULL)
         return 1;
     glfwMakeContextCurrent(window);
@@ -165,12 +172,12 @@ int main(int, char**)
     emscripten_set_main_loop(do_frame, 0, 1);
 
     // Cleanup
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
-
-    glfwDestroyWindow(window);
-    glfwTerminate();
+    //ImGui_ImplOpenGL3_Shutdown();
+    //ImGui_ImplGlfw_Shutdown();
+    //ImGui::DestroyContext();
+//
+    //glfwDestroyWindow(window);
+    //glfwTerminate();
 
     return 0;
 }

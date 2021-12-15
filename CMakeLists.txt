@@ -17,6 +17,8 @@ message("USE_LEGACY_OPENGL: ${USE_LEGACY_OPENGL}")
 
 set(LFLAGS "-s USE_GLFW=3")
 set(LFLAGS "${LFLAGS} -s FULL_ES3=1")
+set(LFLAGS "${LFLAGS} -s EXPORTED_FUNCTIONS=_main,_native_resize")
+set(LFLAGS "${LFLAGS} -s EXPORTED_RUNTIME_METHODS=cwrap")
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "${LFLAGS}")
 target_link_libraries(${PROJECT_NAME} glfw)
