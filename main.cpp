@@ -64,6 +64,19 @@ void setup_dockspace() {
     ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
     static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
     ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
+
+    if (ImGui::BeginMenuBar())
+    {
+        if (ImGui::BeginMenu("File"))
+        {
+            ImGui::MenuItem("Open");
+            ImGui::MenuItem("Save (Download)");
+
+            ImGui::EndMenu();
+        }
+
+        ImGui::EndMenuBar();
+    }
 }
 void end_dockspace() {
     ImGui::PopStyleVar(2);
