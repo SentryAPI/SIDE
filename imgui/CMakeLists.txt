@@ -6,4 +6,5 @@ target_sources(side PRIVATE
     "imgui_tables.cpp"
     "imgui_widgets.cpp"
     "imgui.cpp"
+    "TextEditor.cpp"
 )
