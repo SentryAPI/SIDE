@@ -14,10 +14,14 @@
                 canvas: (function() { return document.getElementById('canvas'); })(),
                 onRuntimeInitialized: function() {
                     native_resize = Module.cwrap("native_resize", 'number', ['number', 'number'])
-                    window.addEventListener('resize', function(event) {
+                    function update_size() {
                         width = document.body.clientWidth;
                         height = document.body.clientHeight;
                         native_resize(width, height)
+                    }
+                    update_size();
+                    window.addEventListener('resize', function(event) {
+                        update_size();
                     }, true);
                 },
             };
