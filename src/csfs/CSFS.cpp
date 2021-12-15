@@ -2,9 +2,9 @@
 #include "../platform.h"
 
 namespace CSFS {
-    #if PLATFORM == "WIN"
+    #if PLATFORM == WIN
     //Doesnt support multiple drives, no real way to achieve this on windows
-    std::string root = "C:/"
+    std::string root = "C:/";
     #else
     std::string root = "/";
     #endif
