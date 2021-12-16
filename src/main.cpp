@@ -16,6 +16,7 @@
 #include <iostream>
 #include "render_host.h"
 #include "editor.h"
+#include "explorer.h"
 #include "storage/sentry_generated.h"
 
 // Our state
@@ -31,6 +32,8 @@ extern "C" void EMSCRIPTEN_KEEPALIVE native_resize(int width, int height) {
 }
 
 void setup_dockspace() {
+    //TODO: Implement default docking layout https://github.com/ocornut/imgui/issues/2109#issuecomment-426204357
+
     // Set the parent window's position, size, and viewport to match that of the main viewport. This is so the parent window
     // completely covers the main viewport, giving it a "full-screen" feel.
     const ImGuiViewport* viewport = ImGui::GetMainViewport();
@@ -93,20 +96,6 @@ void do_frame()
 
     render_host::render_all();
 
-    ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar;
-
-    //ImGui::SetNextWindowSize(ImVec2(400, 400));
-
-    ImGui::Begin("Explorer", nullptr, window_flags);
-
-    if (ImGui::BeginMenuBar()) {
-        if (ImGui::BeginMenu("File Menu")) {
-            ImGui::EndMenu();
-        }
-        ImGui::EndMenuBar();
-    }
-    ImGui::End();
-
     end_dockspace();
 
     // Rendering
@@ -126,6 +115,9 @@ int main(int, char**)
 {
     setup_glfw();
     setup_imgui();
+
+    //Get the explorer to create the inital instance
+    explorer::get_explorer();
 
     // Main loop
     emscripten_set_main_loop(do_frame, 0, 1);
