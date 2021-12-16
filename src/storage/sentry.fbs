@@ -1,0 +1,4 @@
+table Sentry {
+  name:string;
+  damage:int16;
+}

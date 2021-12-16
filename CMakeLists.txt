@@ -2,10 +2,14 @@ cmake_minimum_required(VERSION 3.17)
 project(side VERSION 1.0 LANGUAGES CXX)
 include(ExternalProject)
 include(FetchContent)
+set(CMAKE_AR "emcc")
+set(CMAKE_STATIC_LIBRARY_SUFFIX ".bc")
 add_executable(side)
 
 add_subdirectory(imgui)
 add_subdirectory(src)
+
+target_include_directories(side PUBLIC flatbuffers/include/)
 
 option(USE_LEGACY_OPENGL "Use Legacy OpenGL (fixed function pipeline) or Modern OpenGL (with shaders)" OFF)
 if(USE_LEGACY_OPENGL)

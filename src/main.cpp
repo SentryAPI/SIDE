@@ -16,6 +16,7 @@
 #include <iostream>
 #include "render_host.h"
 #include "editor.h"
+#include "storage/sentry_generated.h"
 
 // Our state
 extern ImVec4 clear_color;
@@ -125,7 +126,7 @@ int main(int, char**)
 {
     setup_glfw();
     setup_imgui();
-    
+
     // Main loop
     emscripten_set_main_loop(do_frame, 0, 1);
 
