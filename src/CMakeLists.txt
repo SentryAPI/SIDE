@@ -4,5 +4,6 @@ target_sources(side PRIVATE
     "render_host.cpp"
     "init.cpp"
     "explorer.cpp"
+    "lang_defs.cpp"
 )
 add_subdirectory(storage)

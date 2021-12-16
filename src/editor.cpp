@@ -1,9 +1,12 @@
 #include "editor.h"
 #include "render_host.h"
+#include "lang_defs.h"
 
 editor::editor(std::string file, std::string editor_name) {
     //Heap allocate the editor & store the pointer
     this->ext_editor = new TextEditor();
+    auto lang_def = SIDE_LANG::LanguageDefinition::Javascript();
+    this->ext_editor->SetLanguageDefinition(lang_def);
     this->editor_name = editor_name;
     this->open = true;
     this->unique_id = (int)(random()*100);
