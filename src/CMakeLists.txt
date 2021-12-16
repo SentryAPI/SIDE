@@ -4,5 +4,3 @@ target_sources(side PRIVATE
     "render_host.cpp"
     "init.cpp"
 )
-# Add Cross-System filesystem
-add_subdirectory(csfs)
