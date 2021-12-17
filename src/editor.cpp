@@ -7,6 +7,7 @@ editor::editor(std::string file, std::string editor_name) {
     this->ext_editor = new TextEditor();
     auto lang_def = SIDE_LANG::LanguageDefinition::Javascript();
     this->ext_editor->SetLanguageDefinition(lang_def);
+    this->ext_editor->SetPalette(TextEditor::GetSentryPalette());
     this->editor_name = editor_name;
     this->open = true;
     this->unique_id = (int)(random()*100);

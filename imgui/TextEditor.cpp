@@ -2087,6 +2087,34 @@ const TextEditor::Palette & TextEditor::GetRetroBluePalette()
 	return p;
 }
 
+const TextEditor::Palette & TextEditor::GetSentryPalette()
+{
+	const static Palette p = { {
+			0xff00ffff,	// None
+			0xffffff00,	// Keyword	
+			0xff00ff00,	// Number
+			0xff808000,	// String
+			0xff808000, // Char literal
+			0xffffffff, // Punctuation
+			0xff008000,	// Preprocessor
+			0xff00ffff, // Identifier
+			0xffffffff, // Known identifier
+			0xffff00ff, // Preproc identifier
+			0xff206020, // Comment (single line)
+			0xff406020, // Comment (multi line)
+			0xff101010, // Background
+			0xffe0e0e0, // Cursor
+			0x80a06020, // Selection
+			0x800020ff, // ErrorMarker
+			0x40f08000, // Breakpoint
+			0xff707000, // Line number
+			0x40000000, // Current line fill
+			0x40808080, // Current line fill (inactive)
+			0x40a0a0a0, // Current line edge
+		} };
+	return p;
+}
+
 
 std::string TextEditor::GetText() const
 {
