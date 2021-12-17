@@ -1,4 +1,9 @@
 table Sentry {
+  generator_major:int;
+  generator_minor:int;
+  generator_patch:int;
+  authors:string;
   name:string;
-  damage:int16;
+  description:string;
+  json_info:string;
 }
